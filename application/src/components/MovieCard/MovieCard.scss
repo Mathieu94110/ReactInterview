@@ -7,4 +7,23 @@
     border-radius: 5px;
     background-color: #121212;
     border-radius: 28px;
+
+    &__remove-icon {
+        display: flex;
+        justify-content: center;
+        height: 40px;
+
+        &>svg {
+            color: #FFF;
+            cursor: pointer;
+            width: 14px;
+            height: auto;
+            transition: width 0.5s;
+
+            &:hover {
+                color: #FF0000;
+                width: 20px;
+            }
+        }
+    }
 }

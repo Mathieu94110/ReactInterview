@@ -34,13 +34,13 @@ const LikesRatioBar = ({ likes, dislikes }: likesRatioType) => {
         calculateBar();
     }, [likesQty, dislikesQty, calculateBar]);
 
-    function addThumbUp(choice: null | 'like' | 'dislike' = null) {
+    function addThumbUp(choice?: 'like' | 'dislike') {
         setUserThumbFeedback('like');
         setLikesQty(likesQty + 1);
         if (!choice) setDislikesQty(dislikesQty - 1)
     }
 
-    function addThumbDown(choice: null | 'like' | 'dislike' = null) {
+    function addThumbDown(choice?: 'like' | 'dislike') {
         setUserThumbFeedback('dislike');
         setDislikesQty(dislikesQty + 1)
         if (!choice) setLikesQty(likesQty - 1);

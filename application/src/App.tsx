@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch } from 'react-redux'
 import { movies$ } from './data/movies'
 import MovieCard from "./components/MovieCard/MovieCard"
-import { setInitialData } from './features/movies/moviesSlice'
+import { setInitialData, removeMovie } from './features/movies/moviesSlice'
 import { useAppSelector } from './app/hooks'
 import { movieType } from './types'
 import './App.scss'
@@ -31,7 +31,7 @@ const App = () => {
       <div className="movies-list">
         {currentMovies && currentMovies.map((movie: movieType) => {
           return (
-            <MovieCard movie={movie} key={movie.id} />
+            <MovieCard movie={movie} key={movie.id} remove={() => dispatch(removeMovie(movie.id))} />
           )
         })
         }

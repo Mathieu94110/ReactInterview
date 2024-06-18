@@ -19,10 +19,20 @@ const moviesSlice = createSlice({
             return {
                 ...state,
                 allMovies: action.payload,
+                filteredMovies: action.payload,
             };
+        },
+        removeMovie: (state, action: PayloadAction<string>) => {
+            const newFilteredMovies = state.filteredMovies.filter((movie) => movie.id !== action.payload)
+            return {
+                ...state,
+                filteredMovies: newFilteredMovies
+
+            };
+
         },
     }
 });
 
-export const { setInitialData } = moviesSlice.actions;
+export const { setInitialData, removeMovie } = moviesSlice.actions;
 export default moviesSlice.reducer;
