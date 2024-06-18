@@ -5,6 +5,12 @@
   text-align: center;
 }
 
+.movie-categories {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
 .movies-list {
   display: flex;
   flex-wrap: wrap;

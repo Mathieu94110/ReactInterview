@@ -1,5 +1,5 @@
 import { movieType } from '../../types'
-import LikesRatioBar from '../LikesRatioBar/LikesRatioBar'
+import LikesRatioBar from './Components/LikesRatioBar/LikesRatioBar'
 import { FaTrashRestore } from "react-icons/fa";
 import './MovieCard.scss'
 
