@@ -1,0 +1,35 @@
+.likes-ratio-bar {
+    width: 100%;
+    margin: 10px auto;
+
+    &__likes {
+        height: 5px;
+        width: 50%;
+        background: #75bc49;
+        float: left;
+    }
+
+    &__dislikes {
+        height: 5px;
+        width: 50%;
+        background: #cc6a7c;
+        float: right;
+    }
+
+    &__bar {
+        margin: 0 auto;
+        width: 70%;
+    }
+
+    &__feedback {
+        width: 60%;
+        margin: 10px auto 0;
+        display: flex;
+        justify-content: space-between;
+
+        &__icon {
+            cursor: pointer;
+            color: #d5d5d5;
+        }
+    }
+}
