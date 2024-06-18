@@ -1,38 +1,36 @@
-import { useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import './MovieCategories.scss';
 import MultiSelectDropdown from './Components/MultiSelectDropdown/MultiSelectDropdown';
+import { Category } from '../../types';
 
-const MovieCategories = ({ filteredCategory }: { filteredCategory: string[] }) => {
-    const [selected, setSelected] = useState([])
-    // test with fake data
-    const data = [
-        { id: 1, title: 'Thriller' },
-        { id: 2, title: 'Drame' },
-        { id: 3, title: 'Comedy' },
-        { id: 4, title: 'Animation' },
-    ]
-    const toggleOption = ({ id }) => {
+const MovieCategories = ({ filteredCategories, handleSelect }: { filteredCategories: Category[], handleSelect: (c: Category[]) => void }) => {
+    const [selected, setSelected] = useState<Category[]>([])
+
+    const toggleCategory = ({ category }: { category: Category }) => {
         setSelected(prevSelected => {
             // if it's in, remove
             const newArray = [...prevSelected]
-            if (newArray.includes(id)) {
-                return newArray.filter(item => item != id)
+            if (newArray.includes(category)) {
+                return newArray.filter(item => item != category)
                 // else, add
             } else {
-                newArray.push(id)
+                newArray.push(category)
                 return newArray;
             }
-        })
+        });
     }
 
-    return (
-        <MultiSelectDropdown options={data} selected={selected} toggleOption={toggleOption} />
-    )
-    // return (
-    //     <div className='movie-categories'>
-    //         {filteredCategory.map(category => category)}
-    //     </div>
-    // )
-}
+    useEffect(() => {
+        handleSelect(selected)
+    }, [handleSelect, selected])
 
-export default MovieCategories
+    return (
+        <MultiSelectDropdown categories={filteredCategories} selected={selected} toggleCategory={toggleCategory} />
+    )
+}
+// Here memo is used to avoid useless render when props not changing
+export default memo(MovieCategories, (prevProps, newProps) => {
+    if (prevProps.filteredCategories === newProps.filteredCategories) {
+        return true;
+    }
+});
