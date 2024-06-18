@@ -7,20 +7,24 @@ import { useAppSelector } from './app/hooks'
 import { Category, movieType } from './types'
 import MovieCategories from "./components/MovieCategories/MovieCategories"
 import './App.scss'
+import Pagination from "./components/Pagination/Pagination"
+import MoviesPerPage from "./components/MoviesPerPage/MoviesPerPage"
 
 const App = () => {
-  const [activePage, setCurrentPage] = useState<number>(1)
-  const [moviesPerPage, setMoviesPerPage] = useState<number>(10)
+  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [moviesPerPage, setMoviesPerPage] = useState<number>(4)
   const [filteredCategories, setFilteredCategories] = useState<Category[]>([])
   const dispatch = useDispatch()
   const allMovies = useAppSelector((state) => state.movies.allMovies);
   const filteredMovies = useAppSelector((state) => state.movies.filteredMovies)
-  const indexOfLastMovie = activePage * moviesPerPage
+  const indexOfLastMovie = currentPage * moviesPerPage
   const indexOfFirstMovie = indexOfLastMovie - moviesPerPage
   // If no data found in filteredMovies list we display allMovies list
   const currentMovies = filteredMovies && filteredMovies.length !== 0 ?
     filteredMovies.slice(indexOfFirstMovie, indexOfLastMovie) :
     allMovies.slice(indexOfFirstMovie, indexOfLastMovie)
+  // Same logic for currentMovies list length
+  const currentMoviesLength = filteredMovies && filteredMovies.length !== 0 ? filteredMovies.length : allMovies.length
 
   // Initial data loading
   useEffect(() => {
@@ -39,9 +43,36 @@ const App = () => {
     }
   }, [allMovies, filteredCategories])
 
+  // Pagination
+  const paginate = (pageNumber: number): void => {
+    setCurrentPage(pageNumber);
+  };
+
+  const previousPage = (): void => {
+    if (currentPage >= 2) {
+      setCurrentPage((current: number) => {
+        return current - 1;
+      });
+    }
+  };
+
+  const nextPage = (): void => {
+    if (currentPage !== Math.ceil(currentMovies.length / moviesPerPage)) {
+      setCurrentPage((current: number) => {
+        return current + 1;
+      });
+    }
+  };
+
+  const setNumberOfMoviesPerPage = (quantity: number): void => {
+    console.log('q =', quantity);
+  };
+
   return (
     <>
-      <MovieCategories filteredCategories={filteredCategories} handleSelect={(selection) => dispatch(filterMovies(selection))} />
+      <div className="movie-filters">  <MovieCategories filteredCategories={filteredCategories} handleSelect={(selection) => dispatch(filterMovies(selection))} />
+        <MoviesPerPage moviesPerPage={moviesPerPage} setNumberOfMoviesPerPage={setNumberOfMoviesPerPage} />
+      </div>
       <div className="movies-list">
         {currentMovies && currentMovies.map((movie: movieType) => {
           return (
@@ -51,6 +82,16 @@ const App = () => {
         })
         }
       </div>
+      {currentMoviesLength > moviesPerPage && (
+        <Pagination
+          moviesPerPage={moviesPerPage}
+          totalPosts={currentMoviesLength}
+          paginate={paginate}
+          previousPage={previousPage}
+          nextPage={nextPage}
+          currentPageNumber={currentPage}
+        />
+      )}
     </>
   )
 }

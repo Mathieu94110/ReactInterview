@@ -1,7 +1,7 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react'
+import MultiSelectDropdown from './Components/MultiSelectDropdown/MultiSelectDropdown'
+import { Category } from '../../types'
 import './MovieCategories.scss';
-import MultiSelectDropdown from './Components/MultiSelectDropdown/MultiSelectDropdown';
-import { Category } from '../../types';
 
 const MovieCategories = ({ filteredCategories, handleSelect }: { filteredCategories: Category[], handleSelect: (c: Category[]) => void }) => {
     const [selected, setSelected] = useState<Category[]>([])

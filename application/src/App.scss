@@ -11,6 +11,12 @@
   margin-bottom: 20px;
 }
 
+.movie-filters {
+  display: inline-block;
+  margin: 100px auto;
+  justify-content: center;
+}
+
 .movies-list {
   display: flex;
   flex-wrap: wrap;
@@ -19,6 +25,11 @@
 }
 
 @media(min-width: 700px) {
+  .movie-filters {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
   .movies-list {
     justify-content: flex-start;
   }

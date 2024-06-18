@@ -1,0 +1,26 @@
+.dropdown {
+    padding: 10px;
+    border: 1px solid #eee;
+
+    &__label {
+        margin-right: 20px;
+        font-size: 14px;
+        color: #FFF;
+        font-weight: 600;
+    }
+
+    &__select {
+        appearance: none;
+        outline: 10px red;
+        border: 0;
+        box-shadow: none;
+        /* Personalize */
+        flex: 1;
+        padding: 0 1em;
+        color: #fff;
+        background-color: var(--darkgray);
+        background-image: none;
+        cursor: pointer;
+    }
+
+}
