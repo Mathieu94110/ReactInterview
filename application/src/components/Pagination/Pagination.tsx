@@ -26,7 +26,7 @@ const Pagination = ({
         <div>
             <ul className="pagination">
                 {currentPageNumber > 1 && (
-                    <li onClick={previousPage} className="paginateItems">
+                    <li onClick={previousPage} className="pagination__item">
                         <FaArrowLeft />
                     </li>
                 )}
@@ -35,15 +35,15 @@ const Pagination = ({
                         key={index}
                         onClick={() => paginate(number)}
                         className={
-                            `paginateItems ` +
-                            (number === currentPageNumber ? `.active` : '')
+                            `pagination__item ` +
+                            (number === currentPageNumber ? `pagination__item--active` : '')
                         }
                     >
                         {number}
                     </li>
                 ))}
                 {currentPageNumber < pageNumbers.length && (
-                    <li onClick={nextPage} className="paginateItems">
+                    <li onClick={nextPage} className="pagination__item">
                         <FaArrowRight />
                     </li>
                 )}

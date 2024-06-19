@@ -1,26 +1,62 @@
 .dropdown {
-    padding: 10px;
-    border: 1px solid #eee;
+    position: relative;
+    margin-top: 20px;
 
-    &__label {
-        margin-right: 20px;
-        font-size: 14px;
+    &__list {
+        position: absolute;
+        background-color: #121212;
+        width: 100%;
+        overflow-y: auto;
+        border-radius: 4px;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        z-index: 10;
         color: #FFF;
-        font-weight: 600;
+
+        &>ul {
+            line-height: 30px;
+            padding-left: 0;
+        }
+
+        &-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 0 12px;
+
+            &:hover {
+                background-color: #eee;
+                color: #121212;
+                font-weight: 600;
+            }
+
+            &--active {
+                background-color: rgb(229 231 235);
+                color: #121212;
+                font-weight: 600;
+            }
+        }
     }
 
-    &__select {
-        appearance: none;
-        outline: 10px red;
-        border: 0;
-        box-shadow: none;
-        /* Personalize */
-        flex: 1;
-        padding: 0 1em;
-        color: #fff;
-        background-color: var(--darkgray);
-        background-image: none;
-        cursor: pointer;
-    }
+    &__button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        border-radius: 4px;
+        width: 100%;
+        padding: 12px 24px;
+        background-color: rgb(59 130 246);
+        color: #FFF;
 
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+@media(min-width: 700px) {
+    .dropdown {
+        margin-top: 0;
+    }
 }

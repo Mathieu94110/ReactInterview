@@ -12,7 +12,7 @@ import MoviesPerPage from "./components/MoviesPerPage/MoviesPerPage"
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const [moviesPerPage, setMoviesPerPage] = useState<number>(4)
+  const [moviesPerPage, setMoviesPerPage] = useState<number>(12)
   const [filteredCategories, setFilteredCategories] = useState<Category[]>([])
   const dispatch = useDispatch()
   const allMovies = useAppSelector((state) => state.movies.allMovies);
@@ -49,29 +49,25 @@ const App = () => {
   };
 
   const previousPage = (): void => {
-    if (currentPage >= 2) {
-      setCurrentPage((current: number) => {
-        return current - 1;
-      });
-    }
+    setCurrentPage((current: number) => {
+      return current - 1;
+    });
   };
 
   const nextPage = (): void => {
-    if (currentPage !== Math.ceil(currentMovies.length / moviesPerPage)) {
-      setCurrentPage((current: number) => {
-        return current + 1;
-      });
-    }
+    setCurrentPage((current: number) => {
+      return current + 1;
+    });
   };
 
-  const setNumberOfMoviesPerPage = (quantity: number): void => {
-    console.log('q =', quantity);
+  const handleMoviesPerPageChange = (quantity: string): void => {
+    setMoviesPerPage(Number(quantity))
   };
 
   return (
     <>
       <div className="movie-filters">  <MovieCategories filteredCategories={filteredCategories} handleSelect={(selection) => dispatch(filterMovies(selection))} />
-        <MoviesPerPage moviesPerPage={moviesPerPage} setNumberOfMoviesPerPage={setNumberOfMoviesPerPage} />
+        <MoviesPerPage moviesPerPage={moviesPerPage} setNumberOfMoviesPerPage={handleMoviesPerPageChange} />
       </div>
       <div className="movies-list">
         {currentMovies && currentMovies.map((movie: movieType) => {
