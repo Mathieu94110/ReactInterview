@@ -4,17 +4,17 @@ import useClickOutside from 'hooks/useClickOutside'
 import './Dropdown.scss'
 
 interface DropdownItem {
-    id: number;
-    value: string;
+    id: number,
+    value: string,
 }
 
 interface DropdownProps {
     id: string,
-    title?: string;
+    title?: string,
     moviesPerPage?: number,
-    data: DropdownItem[];
-    selectedId?: number;
-    onSelect?: (id: number) => void;
+    data: DropdownItem[],
+    selectedId?: number,
+    onSelect?: (id: number) => void,
 }
 
 const Dropdown = ({
@@ -25,23 +25,23 @@ const Dropdown = ({
     selectedId,
     onSelect,
 }: DropdownProps) => {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isOpen, setIsOpen] = useState<boolean>(false)
 
     const [selectedItem, setSelectedItem] = useState<DropdownItem | undefined>(
         selectedId ? data?.find((item) => item.id === selectedId) : undefined
-    );
+    )
 
     const handleChange = (item: DropdownItem) => {
-        setSelectedItem(item);
-        onSelect && onSelect(item.id);
-        setIsOpen(false);
-    };
+        setSelectedItem(item)
+        onSelect && onSelect(item.id)
+        setIsOpen(false)
+    }
 
-    const dropdownRef = useRef<HTMLDivElement>(null);
+    const dropdownRef = useRef<HTMLDivElement>(null)
     useClickOutside({
         ref: dropdownRef,
         handler: () => setIsOpen(false),
-    });
+    })
 
     return (
         <div ref={dropdownRef} className='dropdown'>
@@ -78,7 +78,7 @@ const Dropdown = ({
                 </div>
             )}
         </div>
-    );
-};
+    )
+}
 
-export default Dropdown;
+export default Dropdown

@@ -1,7 +1,7 @@
 import { memo, useEffect, useState } from 'react'
 import MultiSelectDropdown from './Components/MultiSelectDropdown/MultiSelectDropdown'
 import { Category } from 'types'
-import './MovieCategories.scss';
+import './MovieCategories.scss'
 
 const MovieCategories = ({ filteredCategories, handleSelect }: { filteredCategories: Category[], handleSelect: (c: Category[]) => void }) => {
     const [selected, setSelected] = useState<Category[]>([])
@@ -15,9 +15,9 @@ const MovieCategories = ({ filteredCategories, handleSelect }: { filteredCategor
                 // else, add
             } else {
                 newArray.push(category)
-                return newArray;
+                return newArray
             }
-        });
+        })
     }
 
     useEffect(() => {
@@ -31,6 +31,6 @@ const MovieCategories = ({ filteredCategories, handleSelect }: { filteredCategor
 // Here memo is used to avoid useless render when props not changing
 export default memo(MovieCategories, (prevProps, newProps) => {
     if (prevProps.filteredCategories === newProps.filteredCategories) {
-        return true;
+        return true
     }
-});
+})

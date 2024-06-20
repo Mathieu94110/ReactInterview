@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react"
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6"
 import './Pagination.scss'
 
@@ -10,12 +10,12 @@ const Pagination = ({
     nextPage,
     currentPageNumber,
 }: {
-    moviesPerPage: number;
-    totalPosts: number;
-    paginate: (x: number) => void;
-    previousPage: () => void;
-    nextPage: () => void;
-    currentPageNumber: number;
+    moviesPerPage: number,
+    totalPosts: number,
+    paginate: (x: number) => void,
+    previousPage: () => void,
+    nextPage: () => void,
+    currentPageNumber: number
 }) => {
     const isFirstRender = useRef(true)
     // useEffect below is used to go to the previous page when there are no more movies visible on current Page
@@ -37,10 +37,10 @@ const Pagination = ({
         }
     }, [currentPageNumber, moviesPerPage, totalPosts])
 
-    const pageNumbers = [];
+    const pageNumbers = []
 
     for (let i = 1; i <= Math.ceil(totalPosts / moviesPerPage); i++) {
-        pageNumbers.push(i);
+        pageNumbers.push(i)
     }
 
     const setPage = (page: number) => paginate(page)
@@ -72,7 +72,7 @@ const Pagination = ({
                 )}
             </ul>
         </div>
-    );
-};
+    )
+}
 
 export default Pagination

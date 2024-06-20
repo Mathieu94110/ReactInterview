@@ -4,8 +4,8 @@ import './MoviesPerPage.scss'
 const MoviesPerPage = ({ moviesPerPage, setNumberOfMoviesPerPage }: { moviesPerPage: number | undefined, setNumberOfMoviesPerPage: (q: number) => void }) => {
 
     const handleSelect = (value: number) => {
-        setNumberOfMoviesPerPage(value);
-    };
+        setNumberOfMoviesPerPage(value)
+    }
 
     const data = [
         {
@@ -29,7 +29,7 @@ const MoviesPerPage = ({ moviesPerPage, setNumberOfMoviesPerPage }: { moviesPerP
             data={data}
             onSelect={handleSelect}
         />
-    );
+    )
 
-};
+}
 export default MoviesPerPage

@@ -14,11 +14,13 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [moviesPerPage, setMoviesPerPage] = useState<number | undefined>(undefined)
   const [filteredCategories, setFilteredCategories] = useState<Category[]>([])
+
   const dispatch = useDispatch()
-  const allMovies = useAppSelector((state) => state.movies.allMovies);
+  const allMovies = useAppSelector((state) => state.movies.allMovies)
   const filteredMovies = useAppSelector((state) => state.movies.filteredMovies)
-  let currentMovies;
   const currentMoviesLength = filteredMovies && filteredMovies.length !== 0 ? filteredMovies.length : allMovies.length
+  let currentMovies
+
   if (moviesPerPage) {
     const indexOfLastMovie = currentPage * moviesPerPage
     const indexOfFirstMovie = indexOfLastMovie - moviesPerPage
@@ -35,14 +37,14 @@ const App = () => {
   // Initial data loading
   useEffect(() => {
     const fetchMovies = async () => {
-      return movies$;
-    };
-    fetchMovies().then((data) => dispatch(setInitialData(data)));
-  }, [dispatch]);
+      return movies$
+    }
+    fetchMovies().then((data) => dispatch(setInitialData(data)))
+  }, [dispatch])
 
 
   useEffect(() => {
-    const newFilteredCategories = Array.from(new Set(allMovies.map(movie => movie.category)));
+    const newFilteredCategories = Array.from(new Set(allMovies.map(movie => movie.category)))
     // we use JSON.stringify to compare the two returned arrays in order to avoid useless state mutation
     if (JSON.stringify(newFilteredCategories) !== JSON.stringify(filteredCategories)) {
       setFilteredCategories(Array.from(new Set(allMovies.map(movie => movie.category))) as Category[])
@@ -51,24 +53,24 @@ const App = () => {
 
   // Pagination
   const paginate = (pageNumber: number): void => {
-    setCurrentPage(pageNumber);
-  };
+    setCurrentPage(pageNumber)
+  }
 
   const previousPage = (): void => {
     setCurrentPage((current: number) => {
-      return current - 1;
-    });
-  };
+      return current - 1
+    })
+  }
 
   const nextPage = (): void => {
     setCurrentPage((current: number) => {
-      return current + 1;
-    });
-  };
+      return current + 1
+    })
+  }
   //
   const handleMoviesPerPageChange = (q: number): void => {
     setMoviesPerPage(q)
-  };
+  }
 
   return (
     <>

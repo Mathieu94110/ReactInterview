@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Category, movieType } from 'types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Category, movieType } from 'types'
 
 interface MoviesState {
     allMovies: movieType[],
@@ -20,14 +20,14 @@ const moviesSlice = createSlice({
                 ...state,
                 allMovies: action.payload,
                 filteredMovies: action.payload,
-            };
+            }
         },
         removeMovie: (state, action: PayloadAction<string>) => {
             return {
                 allMovies: state.allMovies.filter((movie) => movie.id !== action.payload),
                 filteredMovies: state.filteredMovies.filter((movie) => movie.id !== action.payload)
 
-            };
+            }
 
         },
         filterMovies: (state, action: PayloadAction<Category[]>) => {
@@ -36,17 +36,17 @@ const moviesSlice = createSlice({
                 return {
                     ...state,
                     filteredMovies: newFilteredMovies
-                };
+                }
             } else {
                 return {
                     ...state,
                     filteredMovies: state.allMovies
-                };
+                }
             }
 
         },
     }
-});
+})
 
-export const { setInitialData, removeMovie, filterMovies } = moviesSlice.actions;
-export default moviesSlice.reducer;
+export const { setInitialData, removeMovie, filterMovies } = moviesSlice.actions
+export default moviesSlice.reducer

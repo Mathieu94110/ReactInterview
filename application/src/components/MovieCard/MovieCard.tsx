@@ -1,6 +1,6 @@
 import { movieType } from 'types'
 import LikesRatioBar from './Components/LikesRatioBar/LikesRatioBar'
-import { FaTrashRestore } from "react-icons/fa";
+import { FaTrashRestore } from "react-icons/fa"
 import './MovieCard.scss'
 
 const MovieCard = ({ movie, remove }: { movie: movieType, remove: () => void }) => {
