@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { FiArrowUpCircle, FiArrowDownCircle } from "react-icons/fi"
-import useClickOutside from '../../../hooks/useClickOutside'
+import useClickOutside from 'hooks/useClickOutside'
 import './Dropdown.scss'
 
 interface DropdownItem {

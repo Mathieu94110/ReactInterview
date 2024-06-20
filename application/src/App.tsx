@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from 'react-redux'
 import { movies$ } from './data/movies'
-import MovieCard from "./components/MovieCard/MovieCard"
-import { setInitialData, removeMovie, filterMovies } from './features/movies/moviesSlice'
-import { useAppSelector } from './app/hooks'
-import { Category, movieType } from './types'
-import MovieCategories from "./components/MovieCategories/MovieCategories"
-import Pagination from "./components/Pagination/Pagination"
-import MoviesPerPage from "./components/MoviesPerPage/MoviesPerPage"
+import MovieCard from "components/MovieCard/MovieCard"
+import { setInitialData, removeMovie, filterMovies } from 'features/movies/moviesSlice'
+import { useAppSelector } from 'app/hooks'
+import { Category, movieType } from 'types'
+import MovieCategories from "components/MovieCategories/MovieCategories"
+import Pagination from "components/Pagination/Pagination"
+import MoviesPerPage from "components/MoviesPerPage/MoviesPerPage"
 import './App.scss'
 
 const App = () => {
@@ -72,19 +72,19 @@ const App = () => {
 
   return (
     <>
-      <div className="movie-filters">  <MovieCategories filteredCategories={filteredCategories} handleSelect={(selection) => dispatch(filterMovies(selection))} />
+      <div className="movie-filters">
+        <MovieCategories filteredCategories={filteredCategories} handleSelect={(selection) => dispatch(filterMovies(selection))} />
         <MoviesPerPage moviesPerPage={moviesPerPage} setNumberOfMoviesPerPage={handleMoviesPerPageChange} />
       </div>
       <div className="movies-list">
         {currentMovies && currentMovies.map((movie: movieType) => {
           return (
-
             <MovieCard movie={movie} key={movie.id} remove={() => dispatch(removeMovie(movie.id))} />
           )
         })
         }
       </div>
-      {moviesPerPage && currentMoviesLength > moviesPerPage ? (
+      {moviesPerPage && currentMoviesLength >= moviesPerPage ? (
         <Pagination
           moviesPerPage={moviesPerPage}
           totalPosts={currentMoviesLength}

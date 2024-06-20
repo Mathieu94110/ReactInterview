@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react'
 import MultiSelectDropdown from './Components/MultiSelectDropdown/MultiSelectDropdown'
-import { Category } from '../../types'
+import { Category } from 'types'
 import './MovieCategories.scss';
 
 const MovieCategories = ({ filteredCategories, handleSelect }: { filteredCategories: Category[], handleSelect: (c: Category[]) => void }) => {

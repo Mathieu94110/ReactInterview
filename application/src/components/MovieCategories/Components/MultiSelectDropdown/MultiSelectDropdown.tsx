@@ -1,10 +1,10 @@
 import { useRef, useState } from "react"
 import { FiArrowUpCircle, FiArrowDownCircle } from "react-icons/fi"
-import { Category } from "../../../../types"
-import useClickOutside from "../../../../hooks/useClickOutside"
+import { Category } from "types"
+import useClickOutside from "hooks/useClickOutside"
 import './MultiSelectDropdown.scss'
 
-const MultiSelectDropdown = ({ categories, selected, toggleCategory }: { categories: Category[], selected: Category[], toggleCategory: (cat: Category[]) => void }) => {
+const MultiSelectDropdown = ({ categories, selected, toggleCategory }: { categories: Category[], selected: Category[], toggleCategory: (cat: { category: Category; }) => void }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
     const multiSelectDropdownRef = useRef<HTMLDivElement>(null);
     useClickOutside({

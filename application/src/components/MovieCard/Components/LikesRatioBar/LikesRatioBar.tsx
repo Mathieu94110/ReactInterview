@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
-import { likesRatioType } from '../../../../types'
 import { FaRegThumbsUp, FaThumbsUp, FaRegThumbsDown, FaThumbsDown } from "react-icons/fa"
 import { IconType } from 'react-icons'
-import { formatNumber } from '../../../../utils'
+import { likesRatioType } from 'types'
+import { formatNumber } from 'utils'
 import './LikesRatioBar.scss'
 
 const LikesRatioBar = ({ likes, dislikes }: likesRatioType) => {
