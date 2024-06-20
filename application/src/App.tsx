@@ -6,25 +6,31 @@ import { setInitialData, removeMovie, filterMovies } from './features/movies/mov
 import { useAppSelector } from './app/hooks'
 import { Category, movieType } from './types'
 import MovieCategories from "./components/MovieCategories/MovieCategories"
-import './App.scss'
 import Pagination from "./components/Pagination/Pagination"
 import MoviesPerPage from "./components/MoviesPerPage/MoviesPerPage"
+import './App.scss'
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const [moviesPerPage, setMoviesPerPage] = useState<number>(12)
+  const [moviesPerPage, setMoviesPerPage] = useState<number | undefined>(undefined)
   const [filteredCategories, setFilteredCategories] = useState<Category[]>([])
   const dispatch = useDispatch()
   const allMovies = useAppSelector((state) => state.movies.allMovies);
   const filteredMovies = useAppSelector((state) => state.movies.filteredMovies)
-  const indexOfLastMovie = currentPage * moviesPerPage
-  const indexOfFirstMovie = indexOfLastMovie - moviesPerPage
-  // If no data found in filteredMovies list we display allMovies list
-  const currentMovies = filteredMovies && filteredMovies.length !== 0 ?
-    filteredMovies.slice(indexOfFirstMovie, indexOfLastMovie) :
-    allMovies.slice(indexOfFirstMovie, indexOfLastMovie)
-  // Same logic for currentMovies list length
+  let currentMovies;
   const currentMoviesLength = filteredMovies && filteredMovies.length !== 0 ? filteredMovies.length : allMovies.length
+  if (moviesPerPage) {
+    const indexOfLastMovie = currentPage * moviesPerPage
+    const indexOfFirstMovie = indexOfLastMovie - moviesPerPage
+    // If no data found in filteredMovies list we display allMovies list
+    currentMovies = filteredMovies && filteredMovies.length !== 0 ?
+      filteredMovies.slice(indexOfFirstMovie, indexOfLastMovie) :
+      allMovies.slice(indexOfFirstMovie, indexOfLastMovie)
+    // Same logic for currentMovies list length
+  } else {
+    currentMovies = filteredMovies && filteredMovies.length !== 0 ? filteredMovies : allMovies
+  }
+
 
   // Initial data loading
   useEffect(() => {
@@ -39,7 +45,7 @@ const App = () => {
     const newFilteredCategories = Array.from(new Set(allMovies.map(movie => movie.category)));
     // we use JSON.stringify to compare the two returned arrays in order to avoid useless state mutation
     if (JSON.stringify(newFilteredCategories) !== JSON.stringify(filteredCategories)) {
-      setFilteredCategories(Array.from(new Set(allMovies.map(movie => movie.category))))
+      setFilteredCategories(Array.from(new Set(allMovies.map(movie => movie.category))) as Category[])
     }
   }, [allMovies, filteredCategories])
 
@@ -59,9 +65,9 @@ const App = () => {
       return current + 1;
     });
   };
-
-  const handleMoviesPerPageChange = (quantity: string): void => {
-    setMoviesPerPage(Number(quantity))
+  //
+  const handleMoviesPerPageChange = (q: number): void => {
+    setMoviesPerPage(q)
   };
 
   return (
@@ -78,7 +84,7 @@ const App = () => {
         })
         }
       </div>
-      {currentMoviesLength > moviesPerPage && (
+      {moviesPerPage && currentMoviesLength > moviesPerPage ? (
         <Pagination
           moviesPerPage={moviesPerPage}
           totalPosts={currentMoviesLength}
@@ -87,7 +93,7 @@ const App = () => {
           nextPage={nextPage}
           currentPageNumber={currentPage}
         />
-      )}
+      ) : (null)}
     </>
   )
 }

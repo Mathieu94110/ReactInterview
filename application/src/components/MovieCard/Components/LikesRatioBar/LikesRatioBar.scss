@@ -5,14 +5,14 @@
     &__likes {
         height: 5px;
         width: 50%;
-        background: #75bc49;
+        background: var(--green);
         float: left;
     }
 
     &__dislikes {
         height: 5px;
         width: 50%;
-        background: #cc6a7c;
+        background: var(--red-1);
         float: right;
     }
 

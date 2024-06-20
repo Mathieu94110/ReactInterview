@@ -1,8 +1,8 @@
 import { useRef, useState } from "react"
 import { FiArrowUpCircle, FiArrowDownCircle } from "react-icons/fi"
-import { Category } from "../../../../types";
+import { Category } from "../../../../types"
+import useClickOutside from "../../../../hooks/useClickOutside"
 import './MultiSelectDropdown.scss'
-import useClickOutside from "../../../../hooks/useClickOutside";
 
 const MultiSelectDropdown = ({ categories, selected, toggleCategory }: { categories: Category[], selected: Category[], toggleCategory: (cat: Category[]) => void }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
@@ -11,7 +11,6 @@ const MultiSelectDropdown = ({ categories, selected, toggleCategory }: { categor
         ref: multiSelectDropdownRef,
         handler: () => setIsDropdownOpen(false),
     });
-
 
     return (
         <div ref={multiSelectDropdownRef} className="multi-select-dropdown">
@@ -25,7 +24,7 @@ const MultiSelectDropdown = ({ categories, selected, toggleCategory }: { categor
             </button>
 
             <ul className={`multi-select-dropdown__options ${isDropdownOpen ? 'multi-select-dropdown__options-active' : 'multi-select-dropdown__options-default'}`}>
-                {categories.map((category, index) => {
+                {categories.map((category: Category, index) => {
                     const isSelected = selected.includes(category);
 
                     return (

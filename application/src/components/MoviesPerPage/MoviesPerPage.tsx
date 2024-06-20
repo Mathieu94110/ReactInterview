@@ -1,31 +1,31 @@
-// import { ChangeEvent } from 'react'
 import Dropdown from './Components/Dropdown'
 import './MoviesPerPage.scss'
 
-const MoviesPerPage = ({ moviesPerPage, setNumberOfMoviesPerPage }: { moviesPerPage: number, setNumberOfMoviesPerPage: (q: string) => void }) => {
+const MoviesPerPage = ({ moviesPerPage, setNumberOfMoviesPerPage }: { moviesPerPage: number | undefined, setNumberOfMoviesPerPage: (q: number) => void }) => {
 
-    const handleSelect = (value: string) => {
-        console.log(value)
+    const handleSelect = (value: number) => {
         setNumberOfMoviesPerPage(value);
     };
 
     const data = [
         {
-            id: "0",
-            value: 4,
+            id: 4,
+            value: '4 films par page',
         },
         {
-            id: "1",
-            value: 8,
+            id: 8,
+            value: '8 films par page',
         },
         {
-            id: "2",
-            value: 12,
+            id: 12,
+            value: '12 films par page',
         }
     ]
     return (
         <Dropdown
+            id='Films'
             title='Films par page'
+            moviesPerPage={moviesPerPage}
             data={data}
             onSelect={handleSelect}
         />
